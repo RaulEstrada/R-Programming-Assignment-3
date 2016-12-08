@@ -27,11 +27,11 @@ rankhospital <- function(state, outcome, num = "best") {
     data[,column] <- as.double(data[,column])
     data <- data[!is.na(data[,column]),]
     data <- data[order(data[,column], data$Hospital.Name),]
-    if (num == "best") {
+    if (num == "best" && nrow(data) > 0) {
         data[1, 2]
-    } else if (num == "worst") {
+    } else if (num == "worst" && nrow(data) > 0) {
         data[nrow(data), 2]
-    } else if (num > nrow(data)) {
+    } else if (num > nrow(data) || nrow(data) == 0) {
         NA
     } else {
         data[num, 2]
